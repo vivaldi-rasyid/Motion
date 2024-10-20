@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Todo List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="todo-container">
+        <h1><i class="fas fa-clipboard-list icon"></i> Todo List</h1>
+        <input type="text" id="todo-input" placeholder="Tambahkan tugas..." onkeypress="checkEnter(event)">
+        <button onclick="addTodo()"><i class="fas fa-plus"></i> Tambahkan</button>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        async function loadTodos() {
+            const response = await fetch('/todos');
+            const todos = await response.json();
+            todos.forEach(todo => {
+                displayTodo(todo);
+            });
+        }
+
+        async function addTodo() {
+            const todoInput = document.getElementById("todo-input");
+            const todoText = todoInput.value;
+
+            if (todoText === "") {
+                alert("Masukkan tugas!");
+                return;
+            }
+
+            const response = await fetch('/todos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ task: todoText }),
+            });
+
+            const newTodo = await response.json();
+            displayTodo(newTodo);
+            todoInput.value = "";
+        }
+
+        function displayTodo(todo) {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span class="task-text">${todo.task}</span>
+                <button class="remove-btn" onclick="removeTodo(${todo.id})">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            `;
+            document.getElementById("todo-list").appendChild(li);
+        }
+
+        async function removeTodo(id) {
+            await fetch(`/todos/${id}`, {
+                method: 'DELETE',
+            });
+            location.reload();
+        }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                addTodo();
+            }
+        }
+
+        window.onload = loadTodos;
+    </script>
+
+</body>
+</html>

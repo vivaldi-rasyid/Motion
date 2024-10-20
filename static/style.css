@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e6f0f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.todo-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #cce1f2;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border: 2px solid #4a90e2;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ab7;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+ul li {
+    background-color: #f7fbff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #d1e4f2;
+    transition: background-color 0.3s ease;
+}
+
+ul li:hover {
+    background-color: #e6f0f5;
+}
+
+ul li .remove-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    width: 24px; /* Menetapkan ukuran lebar tombol tetap */
+    height: 24px; /* Menetapkan ukuran tinggi tombol tetap */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px; /* Menetapkan ukuran font untuk ikon tetap */
+    transition: background-color 0.3s ease;
+}
+
+ul li .remove-btn:hover {
+    background-color: #e74c3c;
+}
+
+ul li .task-text {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.icon {
+    color: #4a90e2;
+}
