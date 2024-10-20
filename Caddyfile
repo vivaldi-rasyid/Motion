@@ -1,0 +1,3 @@
+https://20.33.103.134 {
+    reverse__proxy localhost:8000
+}
